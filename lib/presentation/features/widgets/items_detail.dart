@@ -1,6 +1,9 @@
+import 'package:eccomerce/presentation/features/controller/cart_controler.dart';
+import 'package:eccomerce/presentation/features/model/cart_model.dart';
 import 'package:eccomerce/presentation/features/model/model_data.dart';
 import 'package:eccomerce/presentation/features/widgets/cart_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
 class ItemDetails extends StatefulWidget {
   String idItem;
@@ -14,11 +17,14 @@ class ItemDetails extends StatefulWidget {
 class _ItemDetailsState extends State<ItemDetails> {
   @override
   Widget build(BuildContext context) {
+    final cartData= context.read<CartController>();
+
     final selectModel = dummyMeal.firstWhere((meal) => meal.id == widget.idItem);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("Detailed screen"),
+
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,6 +52,14 @@ class _ItemDetailsState extends State<ItemDetails> {
           ),
           Text(selectModel.title),
           const Padding(
+            padding: EdgeInsets.only(bottom: 10.0),
+            child: Text(
+              "Price",
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Text("${selectModel.price}\$"),
+          const Padding(
             padding: EdgeInsets.all(10.0),
             child: Text(
               "Description",
@@ -63,8 +77,11 @@ class _ItemDetailsState extends State<ItemDetails> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_) =>  CartScreen(selectModel.id)));
+
+          cartData.cartModel= CartModel(itemName: selectModel.title,
+              price: selectModel.price,quantity:1,imageUrl:selectModel.imageUrl);
+
+          Navigator.push(context, MaterialPageRoute(builder: (_)=>CartScreen()));
         },
         child: const Icon(Icons.add_shopping_cart),
       ),

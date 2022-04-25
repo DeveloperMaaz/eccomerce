@@ -1,8 +1,18 @@
+import 'package:eccomerce/presentation/features/controller/cart_controler.dart';
+import 'package:eccomerce/presentation/features/controller/data_controller.dart';
 import 'package:eccomerce/presentation/features/widgets/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+        providers: [
+          Provider<EcommerceData>(create: (_) => EcommerceData()),
+          Provider< CartController>(create: (_) =>  CartController()),
+        ],
+        child: const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {

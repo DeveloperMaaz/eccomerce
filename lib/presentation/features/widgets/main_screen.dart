@@ -71,6 +71,16 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ],
                     ),
+                    Row(
+                     // mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(11.0),
+                          child: Text("${dummyMeal[index].price.toString()}\$",style: const TextStyle(fontSize: 20.0),),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
