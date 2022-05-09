@@ -12,5 +12,4 @@ abstract class CartData with Store {
   @observable
   List<CartModel> listCart = [];
 
-
 }
